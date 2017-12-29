@@ -2,60 +2,64 @@
 
 return array(
 
-	/*
-	|--------------------------------------------------------------------------
-	| User Repositiory Messages
-	|--------------------------------------------------------------------------
-	*/
+    /*
+    |--------------------------------------------------------------------------
+    | User Repositiory Messages
+    |--------------------------------------------------------------------------
+    */
 
-	'created' 		=>  "Sua conta foi criada. Verifique seu e-mail para o link de confirmação.",
+    'created'        =>  "Sua conta foi criada. Verifique seu e-mail para o link de confirmação.",
 
-	'createdactive' =>  "Sua conta foi criada. Agora você pode entrar.",
+    'createdactive' =>  "Sua conta foi criada. Agora você pode entrar.",
 
-	'added'			=>  "Novo usuário acrescentou. Verifique a conta de e-mail para o link de confirmação.",
+    'added'            =>  "Novo usuário acrescentou. Verifique a conta de e-mail para o link de confirmação.",
 
-	'addedactive'	=>  "Novo usuário acrescentou.",
+    'addedactive'    =>  "Novo usuário acrescentou.",
 
-	'loginreq' 		=>	"Campo Login é obrigatório.",
+    'loginreq'        =>    "Campo Login é obrigatório.",
 
-	'exists'		=>	"Usuário já existente.",
+    'exists'        =>    "Usuário já existente.",
 
-	'notfound'		=>	"Usuário não encontrado",
+    'notfound'        =>    "Usuário não encontrado",
 
-	'noaccess'		=>	"Você não tem permissão.",
+    'noaccess'        =>    "Você não tem permissão.",
 
-	'updated'		=>	"Perfil Atualizado",
+    'updated'        =>    "Perfil Atualizado",
 
-	'notupdated'	=>	"Não foi possível atualizar o perfil",
+    'notupdated'    =>    "Não foi possível atualizar o perfil",
 
-	'activated'		=>	"Ativação completa. <a href=':url' class='alert-link'>Agora você pode acessar</a>",
+    'activated'        =>    "Ativação completa. <a href=':url' class='alert-link'>Agora você pode acessar</a>",
 
-	'notactivated'	=>	"A ativação não pode ser completada.",
+    'notactivated'    =>    "A ativação não pode ser completada.",
 
-	'alreadyactive'	=>	"Está conta já está ativada.",
+    'alreadyactive'    =>    "Está conta já está ativada.",
 
-	'emailconfirm'	=>	"Verifique seu email pelo link de confirmação.",
+    'emailconfirm'    =>    "Verifique seu email pelo link de confirmação.",
 
-	'emailinfo'		=>	"Verifique seu email para maiores instruções.",
+    'emailinfo'        =>    "Verifique seu email para maiores instruções.",
 
-	'emailpassword'	=>	"Sua senha foi alterada. Verifique seu email para otber a nova senha.",
+    'emailpassword'    =>    "Sua senha foi alterada. Verifique seu email para otber a nova senha.",
 
-	'problem'		=>	"Ocorreu um problema. Por favor contate o administrador do sistema.",
+    'problem'        =>    "Ocorreu um problema. Por favor contate o administrador do sistema.",
 
-	'passwordchg'	=> 	"Sua senha foi alterada.",
+    'passwordchg'    =>    "Sua senha foi alterada.",
 
-	'passwordprob'	=>	"Não foi possível alterar a sua senha.",
+    'passwordprob'    =>    "Não foi possível alterar a sua senha.",
 
-	'oldpassword'	=>	"Você não informou a senha original correta.",
+    'oldpassword'    =>    "Você não informou a senha original correta.",
 
-	'suspended'		=>	"Usuário foi suspenso por 15 minutos.",
+    'suspended'        =>    "Usuário foi suspenso por 15 minutos.",
 
-	'unsuspended'	=>	"Suspensão removida.",
+    'unsuspended'    =>    "Suspensão removida.",
 
-	'banned'		=>	"Usuário foi banido.",
+    'banned'        =>    "Usuário foi banido.",
 
-	'unbanned'		=>	"Usuário foi rehabilitado.",
+    'unbanned'        =>    "Usuário foi rehabilitado.",
 
-	'inactive_reg' 	=>  "Registro não disponível neste momento."
+    'inactive_reg'    =>  "Registro não disponível neste momento.",
+
+    'destroyed'     =>  "Usuário foi removido.",
+
+    'notdestroyed'  =>  "Não é possível remover o usuário."
 
 );

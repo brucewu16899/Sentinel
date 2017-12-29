@@ -2,64 +2,64 @@
 
 return array(
 
-	/*
-	|--------------------------------------------------------------------------
-	| Language strings for views
-	|--------------------------------------------------------------------------
-	*/
+    /*
+    |--------------------------------------------------------------------------
+    | Language strings for views
+    |--------------------------------------------------------------------------
+    */
 
-	'flashsuccess'	=> 'Erfolg',
+    'flashsuccess'    => 'Erfolg',
 
-	'flasherror'	=> 'Fehler',
+    'flasherror'    => 'Fehler',
 
-	'flashwarning'	=> 'Warnung',
+    'flashwarning'    => 'Warnung',
 
-	'flashinfo'		=> 'Info',
+    'flashinfo'        => 'Info',
 
-	'register'		=> 'Registrieren',
+    'register'        => 'Registrieren',
 
-	'login'			=> "Anmelden",
+    'login'            => "Anmelden",
 
-	'logout'		=> "Abmelden",
+    'logout'        => "Abmelden",
 
-	'home'			=> "Startseite",
+    'home'            => "Startseite",
 
-	'users' 		=> 'Benutzer|Benutzer',
+    'users'        => 'Benutzer|Benutzer',
 
-	'groups'		=> "Gruppen",
+    'groups'        => "Gruppen",
 
-	'helloworld'	=> "Hello World!",
+    'helloworld'    => "Hallo Welt!",
 
-	'description'	=> "Das ist ein Beispiel für <a href=\"https://github.com/laravel/laravel\">Laravel 4.1</a>, das mit <a href=\"https://github.com/cartalyst/sentry\">Sentry 2.0</a> und <a href=\"http://getbootstrap.com/\">Bootstrap 3.0</a> läuft.",
+    'description'    => "Das ist ein Beispiel für <a href=\"https://github.com/laravel/laravel\">Laravel 4.1</a>, das mit <a href=\"https://github.com/cartalyst/sentry\">Sentry 2.0</a> und <a href=\"http://getbootstrap.com/\">Bootstrap 3.0</a> läuft.",
 
-	'loginstatus'	=> "Sie sind angemeldet.",
+    'loginstatus'    => "Sie sind angemeldet.",
 
-	'sessiondata'	=> "Sitzungsdaten",
+    'sessiondata'    => "Sitzungsdaten",
 
-	'currentusers'	=> "Aktive Benutzer",
+    'currentusers'    => "Aktive Benutzer",
 
-	'options'		=> 'Optionen',
+    'options'        => 'Optionen',
 
-	'status'		=> "Status",
+    'status'        => "Status",
 
-	'active'		=> "Aktiv",
+    'active'        => "Aktiv",
 
-	'notactive'		=> "Inaktiv",
+    'notactive'        => "Inaktiv",
 
-	'suspended'		=> "Ruhend",
+    'suspended'        => "Ruhend",
 
-	'banned'		=> "Gesperrt",
+    'banned'        => "Gesperrt",
 
-	'actionedit'	=> "Bearbeiten",
+    'actionedit'    => "Bearbeiten",
 
-	'actionsuspend'	=> "Ruhen lassen",
+    'actionsuspend'    => "Ruhen lassen",
 
-	'actionunsuspend' => "Reaktivieren",
+    'actionunsuspend' => "Reaktivieren",
 
-	'actionban'		=> "Sperren",
+    'actionban'        => "Sperren",
 
-	'actionunban'	=> "Entsperren",
+    'actionunban'    => "Entsperren",
 
-	'actiondelete'	=> "Löschen",
+    'actiondelete'    => "Löschen",
 
 );

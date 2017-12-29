@@ -1,10 +1,15 @@
-<?php namespace Sentinel\Traits;
+<?php
 
-use Redirect, Response, Session;
+namespace Sentinel\Traits;
+
+use Request;
+use Session;
+use Redirect;
+use Response;
 use Sentinel\DataTransferObjects\BaseResponse;
 
-trait SentinelRedirectionTrait {
-
+trait SentinelRedirectionTrait
+{
     /**
      * Use a ResponseObject to generate a browser redirect, based on config options
      *
@@ -15,12 +20,9 @@ trait SentinelRedirectionTrait {
      */
     public function redirectViaResponse($key, BaseResponse $response)
     {
-        if ($response->isSuccessful())
-        {
+        if ($response->isSuccessful()) {
             $message = ['success' => $response->getMessage()];
-        }
-        else
-        {
+        } else {
             $message = ['error' => $response->getMessage()];
         }
 
@@ -41,7 +43,7 @@ trait SentinelRedirectionTrait {
      *
      * @return Response
      */
-    public function redirectTo($key, array $message = null, $payload = [])
+    public function redirectTo($key, array $message = [], $payload = [])
     {
         // A key can either be a string representing a config entry, or
         // an array representing the "direction" we intend to go in.
@@ -55,16 +57,15 @@ trait SentinelRedirectionTrait {
 
         // If the url is empty or views have been disabled the developer
         // wants to return json rather than an HTML view.
-        if (! $url || !$views) {
+        if (! $url || !$views || Request::ajax() || Request::pjax()) {
             return Response::json(array_merge($payload, $message));
         }
 
         // Do we need to flash any session data?
-        if ($message)
-        {
+        if ($message) {
             $status = key($message);
             $text   = current($message);
-            Session::flash($status,$text);
+            Session::flash($status, $text);
         }
 
         // Redirect to the intended url
@@ -77,22 +78,21 @@ trait SentinelRedirectionTrait {
      * @param $message
      * @param $payload
      */
-    public function redirectBack($message, $payload)
+    public function redirectBack($message, $payload = [])
     {
         // Determine if the developer has disabled HTML views
         $views = config('sentinel.views_enabled');
 
         // If views have been disabled, return a JSON response
-        if (!$views) {
+        if (!$views || Request::ajax() || Request::pjax()) {
             return Response::json(array_merge($payload, $message), 400);
         }
 
         // Do we need to flash any session data?
-        if ($message)
-        {
+        if ($message) {
             $status = key($message);
             $text   = current($message);
-            Session::flash($status,$text);
+            Session::flash($status, $text);
         }
 
         // Go back
@@ -117,8 +117,7 @@ trait SentinelRedirectionTrait {
         $location = current($direction);
 
         // If no URL target was specified we can't do anything.
-        if (is_null($location))
-        {
+        if (is_null($location)) {
             return null;
         }
 
@@ -137,10 +136,8 @@ trait SentinelRedirectionTrait {
     {
         $parameters = [];
 
-        foreach($specifications as $name => $member)
-        {
-            if (isset($payload[$name]))
-            {
+        foreach ($specifications as $name => $member) {
+            if (isset($payload[$name])) {
                 $parameters[] = $payload[$name]->$member;
             }
         }

@@ -1,17 +1,21 @@
-<?php namespace Sentinel\Controllers;
+<?php
 
+namespace Sentinel\Controllers;
+
+use View;
+use Sentry;
+use Request;
+use Redirect;
 use Vinkla\Hashids\HashidsManager;
-use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Pagination\Paginator;
-use Sentinel\FormRequests\GroupCreateRequest;
-use Sentinel\Repositories\Group\SentinelGroupRepositoryInterface;
-use Sentinel\Traits\SentinelRedirectionTrait;
 use Sentinel\Traits\SentinelViewfinderTrait;
-use View, Input, Redirect;
+use Sentinel\FormRequests\GroupCreateRequest;
+use Sentinel\Traits\SentinelRedirectionTrait;
+use Illuminate\Routing\Controller as BaseController;
+use Sentinel\Repositories\Group\SentinelGroupRepositoryInterface;
 
 class GroupController extends BaseController
 {
-
     /**
      * Traits
      */
@@ -39,12 +43,8 @@ class GroupController extends BaseController
      */
     public function index()
     {
-        // Paginate the existing users
-        $groups      = $this->groupRepository->all();
-        $perPage     = 15;
-        $currentPage = Input::get('page') - 1;
-        $pagedData   = array_slice($groups, $currentPage * $perPage, $perPage);
-        $groups      = new Paginator($pagedData, $perPage, $currentPage);
+        // Get a paginated set of groups
+        $groups = Sentry::getGroupProvider()->createModel()->paginate(15);
 
         return $this->viewFinder('Sentinel::groups.index', ['groups' => $groups]);
     }
@@ -67,7 +67,7 @@ class GroupController extends BaseController
     public function store(GroupCreateRequest $request)
     {
         // Gather input
-        $data = Input::all();
+        $data = Request::all();
 
         // Store the new group
         $result = $this->groupRepository->store($data);
@@ -118,7 +118,7 @@ class GroupController extends BaseController
     public function update($hash)
     {
         // Gather Input
-        $data = Input::all();
+        $data = Request::all();
 
         // Decode the hashid
         $data['id'] = $this->hashids->decode($hash)[0];
@@ -144,5 +144,4 @@ class GroupController extends BaseController
 
         return $this->redirectViaResponse('groups_destroy', $result);
     }
-
 }

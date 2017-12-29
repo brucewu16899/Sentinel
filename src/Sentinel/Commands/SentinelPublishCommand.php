@@ -1,4 +1,6 @@
-<?php namespace Sentinel\Commands;
+<?php
+
+namespace Sentinel\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Console\ConfirmableTrait;
@@ -9,7 +11,6 @@ use Symfony\Component\Console\Input\InputArgument;
 
 class SentinelPublishCommand extends Command
 {
-
     /**
      * The console command name.
      *
@@ -75,7 +76,7 @@ class SentinelPublishCommand extends Command
      *
      * @return mixed
      */
-    public function fire()
+    public function handle()
     {
         // Don't allow this command to run in a production environment
         if (!$this->confirmToProceed()) {
@@ -134,16 +135,13 @@ class SentinelPublishCommand extends Command
      */
     protected function getOptions()
     {
-        return array(
-            array(
-                'theme',
-                null,
-                InputOption::VALUE_OPTIONAL,
-                'The name of the UI theme you want to use with Sentinel.',
-                'bootstrap'
-            ),
-            array('list', null, InputOption::VALUE_NONE, 'Show a list of currently supported UI Themes.'),
-        );
+        return [
+            ['theme', null, InputOption::VALUE_OPTIONAL, 'The name of the UI theme you want to use with Sentinel.', 'bootstrap'],
+
+            ['list', null, InputOption::VALUE_NONE, 'Show a list of currently supported UI Themes.'],
+
+            ['force', null, InputOption::VALUE_NONE, 'Force the operation to run when in production.'],
+        ];
     }
 
     /**
@@ -157,7 +155,7 @@ class SentinelPublishCommand extends Command
 
         // If this file has already been published, confirm that we want to overwrite.
         if ($this->file->isFile($destination)) {
-            $answer = $this->confirm('Sentinel config has already been published. Do you want to overwrite? (y/n)');
+            $answer = $this->confirm('Sentinel config has already been published. Do you want to overwrite?');
 
             if (!$answer) {
                 return;
@@ -182,7 +180,7 @@ class SentinelPublishCommand extends Command
 
         // If this file has already been published, confirm that we want to overwrite.
         if ($this->file->isFile($destination)) {
-            $answer = $this->confirm('Sentry config has already been published. Do you want to overwrite? (y/n)');
+            $answer = $this->confirm('Sentry config has already been published. Do you want to overwrite?');
 
             if (!$answer) {
                 return;
@@ -208,7 +206,7 @@ class SentinelPublishCommand extends Command
 
         // If there are already config files published, confirm that we want to overwrite them.
         if ($this->file->isFile($destination)) {
-            $answer = $this->confirm('Hashid Config file has already been published. Do you want to overwrite? (y/n)');
+            $answer = $this->confirm('Hashid Config file has already been published. Do you want to overwrite?');
 
             if (!$answer) {
                 return;
@@ -234,7 +232,7 @@ class SentinelPublishCommand extends Command
 
         // If there are already views published, confirm that we want to overwrite them.
         if ($this->file->isDirectory($destination)) {
-            $answer = $this->confirm('Views have already been published. Do you want to overwrite? (y/n)');
+            $answer = $this->confirm('Views have already been published. Do you want to overwrite?');
 
             if (!$answer) {
                 return;
@@ -260,7 +258,7 @@ class SentinelPublishCommand extends Command
 
         // If there are already assets published, confirm that we want to overwrite.
         if ($this->file->isDirectory($destination)) {
-            $answer = $this->confirm('Theme assets have already been published. Do you want to overwrite? (y/n)');
+            $answer = $this->confirm('Theme assets have already been published. Do you want to overwrite?');
 
             if (!$answer) {
                 return;
@@ -279,19 +277,17 @@ class SentinelPublishCommand extends Command
      */
     private function publishMigrations()
     {
-        if ($this->confirm('Would you like to publish the migration files? (y/n)')) {
-            // Prepare file paths
-            $source      = $this->packagePath . '/../migrations';
+        if ($this->confirm('Would you like to publish the migration files?')) {
+
+            // Prepare for copying files
+            $source      = $this->packagePath . '/../../migrations/';
             $destination = $this->appPath . '/../database/migrations';
 
-            // Copy the migration files
+            // Copy the asset files for the selected theme
             $this->file->copyDirectory($source, $destination);
 
             // Notify action completion
-            $this->info('Sentinel migration files have been published.');
-
+            $this->info('Migration files have been published.');
         }
     }
-
-
 }

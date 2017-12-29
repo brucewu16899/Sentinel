@@ -14,7 +14,7 @@ return array(
     */
 
     "accepted"         => "O campo :attribute deve ser aceito.",
-
+    
     "active_url"       => "O campo :attribute não contém um URL válido.",
     
     "after"            => "O campo :attribute deverá conter uma data posterior a :date.",
@@ -27,8 +27,6 @@ return array(
 
     "alpha_spaces"     => "O campo :attribute só pode conter letras e espaços.",
     
-    "array"            => "O campo :attribute precisa ser um conjunto.",
-    
     "before"           => "O campo :attribute deverá conter uma data anterior a :date.",
     
     "between"          => array(
@@ -38,8 +36,6 @@ return array(
         "file"    => "O campo :attribute deverá ter um tamanho entre :min - :max kilobytes.",
     
         "string"  => "O campo :attribute deverá conter entre :min - :max caracteres.",
-    
-        "array"   => "O campo :attribute precisar ter entre :min - :max itens."
     
     ),
     
@@ -75,8 +71,6 @@ return array(
     
         "string"  => "O campo :attribute não deverá conter mais de :max caracteres.",
     
-        "array"   => "O campo :attribute deve ter no máximo :max itens."
-    
     ),
     
     "mimes"            => "O campo :attribute deverá conter um arquivo do tipo: :values.",
@@ -89,8 +83,6 @@ return array(
     
         "string"  => "O campo :attribute deverá conter no mínimo :min caracteres.",
     
-        "array"   => "O campo :attribute deve ter no mínimo :min itens."
-    
     ),
     
     "not_in"           => "O campo :attribute contém um valor inválido.",
@@ -101,15 +93,9 @@ return array(
     
     "required"         => "É obrigatória a indicação de um valor para o campo :attribute.",
     
-    "required_if"      => "É obrigatória a indicação de um valor para o campo :attribute quando o valor do campo :other é igual a :value.",
-    
     "required_with"    => "É obrigatória a indicação de um valor para o campo :attribute quando :values está presente.",
     
-    "required_with_all" => "The :attribute field is required when :values is present.",
-    
     "required_without" => "É obrigatória a indicação de um valor para o campo :attribute quanto :values não está presente.",
-    
-    "required_without_all" => "É obrigatória a indicação de um valor para o campo :attribute quando nenhum dos :values está presente.",
     
     "same"             => "Os campos :attribute e :other deverão conter valores iguais.",
     
@@ -120,8 +106,6 @@ return array(
         "file"    => "O campo :attribute deverá ter o tamanho de :size kilobytes.",
     
         "string"  => "O campo :attribute deverá conter :size caracteres.",
-    
-        "array"   => "O campo :attribute deve ter :size itens."
     
     ),
     

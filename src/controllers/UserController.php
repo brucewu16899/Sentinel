@@ -1,20 +1,27 @@
-<?php namespace Sentinel\Controllers;
+<?php
 
-use Illuminate\Routing\Controller as BaseController;
+namespace Sentinel\Controllers;
+
+use View;
+use Event;
+use Config;
+use Sentry;
+use Request;
+use Session;
+use Redirect;
+use Vinkla\Hashids\HashidsManager;
 use Illuminate\Pagination\Paginator;
-use Sentinel\FormRequests\ChangePasswordRequest;
 use Sentinel\FormRequests\UserCreateRequest;
 use Sentinel\FormRequests\UserUpdateRequest;
-use Sentinel\Repositories\Group\SentinelGroupRepositoryInterface;
-use Sentinel\Repositories\User\SentinelUserRepositoryInterface;
-use Sentinel\Traits\SentinelRedirectionTrait;
 use Sentinel\Traits\SentinelViewfinderTrait;
-use Vinkla\Hashids\HashidsManager;
-use View, Input, Event, Redirect, Session, Config;
+use Sentinel\Traits\SentinelRedirectionTrait;
+use Sentinel\FormRequests\ChangePasswordRequest;
+use Illuminate\Routing\Controller as BaseController;
+use Sentinel\Repositories\User\SentinelUserRepositoryInterface;
+use Sentinel\Repositories\Group\SentinelGroupRepositoryInterface;
 
 class UserController extends BaseController
 {
-
     /**
      * Traits
      */
@@ -44,12 +51,8 @@ class UserController extends BaseController
      */
     public function index()
     {
-        // Paginate the existing users
-        $users       = $this->userRepository->all();
-        $perPage     = 15;
-        $currentPage = Input::get('page') - 1;
-        $pagedData   = array_slice($users, $currentPage * $perPage, $perPage);
-        $users       = new Paginator($pagedData, $perPage, $currentPage);
+        // Get a paginated set of users
+        $users = Sentry::getUserProvider()->createModel()->paginate(15);
 
         return $this->viewFinder('Sentinel::users.index', ['users' => $users]);
     }
@@ -73,7 +76,7 @@ class UserController extends BaseController
     public function store(UserCreateRequest $request)
     {
         // Create and store the new user
-        $result = $this->userRepository->store(Input::all());
+        $result = $this->userRepository->store($request->all());
 
         // Determine response message based on whether or not the user was activated
         $message = ($result->getPayload()['activated'] ? trans('Sentinel::users.addedactive') : trans('Sentinel::users.added'));
@@ -86,7 +89,7 @@ class UserController extends BaseController
     /**
      * Show the profile of a specific user account
      *
-     * @param $id
+     * @param $hash
      *
      * @return View
      */
@@ -135,7 +138,7 @@ class UserController extends BaseController
     public function update(UserUpdateRequest $request, $hash)
     {
         // Gather Input
-        $data = Input::all();
+        $data = $request->all();
 
         // Decode the hashid
         $data['id'] = $this->hashids->decode($hash)[0];
@@ -179,7 +182,7 @@ class UserController extends BaseController
         $id = $this->hashids->decode($hash)[0];
 
         // Gather input
-        $groups = Input::get('groups');
+        $groups = Request::get('groups');
 
         // Change memberships
         $result = $this->userRepository->changeGroupMemberships($id, $groups);
@@ -198,7 +201,7 @@ class UserController extends BaseController
     public function changePassword(ChangePasswordRequest $request, $hash)
     {
         // Gather input
-        $data       = Input::all();
+        $data       = $request->all();
         $data['id'] = $this->hashids->decode($hash)[0];
 
         // Grab the current user
@@ -288,7 +291,4 @@ class UserController extends BaseController
 
         return $this->redirectViaResponse('users_unban', $result);
     }
-
 }
-
-

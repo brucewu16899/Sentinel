@@ -14,7 +14,7 @@ Log In
             <h2 class="form-signin-heading">Sign In</h2>
 
             <div class="form-group {{ ($errors->has('email')) ? 'has-error' : '' }}">
-                <input class="form-control" placeholder="Email" autofocus="autofocus" name="email" type="text" value="{{ Input::old('email') }}">
+                <input class="form-control" placeholder="Email" autofocus="autofocus" name="email" type="text" value="{{ Request::old('email') }}">
                 {{ ($errors->has('email') ? $errors->first('email') : '') }}
             </div>
 
@@ -22,11 +22,11 @@ Log In
                 <input class="form-control" placeholder="Password" name="password" value="" type="password">
                 {{ ($errors->has('password') ?  $errors->first('password') : '') }}
             </div>
-
-            <label class="checkbox">
-                <input name="rememberMe" value="rememberMe" type="checkbox"> Remember Me
-            </label>
-
+            <div class="checkbox">
+                <label>
+                    <input name="rememberMe" value="rememberMe" type="checkbox"> Remember Me
+                </label>
+            </div>
             <input name="_token" value="{{ csrf_token() }}" type="hidden">
             <input class="btn btn-primary" value="Sign In" type="submit">
             <a class="btn btn-link" href="{{ route('sentinel.forgot.form') }}">Forgot Password</a>

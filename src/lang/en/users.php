@@ -2,66 +2,66 @@
 
 return array(
 
-	/*
-	|--------------------------------------------------------------------------
-	| User Repositiory Messages
-	|--------------------------------------------------------------------------
-	*/
+    /*
+    |--------------------------------------------------------------------------
+    | User Repositiory Messages
+    |--------------------------------------------------------------------------
+    */
 
-	'created' 		=>  "Your account has been created. Check your email for the confirmation link.",	
+    'created'        =>  "Your account has been created. Check your email for the confirmation link.",
 
-	'createdactive' =>  "Your account has been created. You can now login.",
+    'createdactive' =>  "Your account has been created. You can now login.",
 
-	'added'			=>  "New user added. Check the email account for the confirmation link.",
+    'added'            =>  "New user added. Check the email account for the confirmation link.",
 
-	'addedactive'	=>  "New user added.",
+    'addedactive'    =>  "New user added.",
 
-	'loginreq' 		=>	"Login field required.",
+    'loginreq'        =>    "Login field required.",
 
-	'exists'		=>	"User already exists.",
+    'exists'        =>    "User already exists.",
 
-	'notfound'		=>	"User not found",
+    'notfound'        =>    "User not found",
 
-	'noaccess'		=>	"You are not allowed to do that.",
+    'noaccess'        =>    "You are not allowed to do that.",
 
-	'updated'		=>	"Profile updated",
+    'updated'        =>    "Profile updated",
 
-	'notupdated'	=>	"Unable to update profile",
+    'notupdated'    =>    "Unable to update profile",
 
-	'activated'		=>	"Activation complete. <a href=':url' class='alert-link'>You may now login</a>",
+    'activated'        =>    "Activation complete. <a href=':url' class='alert-link'>You may now login</a>",
 
-	'notactivated'	=>	"Activation could not be completed.",
+    'notactivated'    =>    "Activation could not be completed.",
 
-	'alreadyactive'	=>	"That account has already been activated.",
+    'alreadyactive'    =>    "That account has already been activated.",
 
-	'emailconfirm'	=>	"Check your email for the confirmation link.",
+    'pendingactivation' => "If an account for this email is found, you will receive the activation email in the next few minutes.",
 
-	'emailinfo'		=>	"Check your email for instructions.",
+    'emailconfirm'    =>    "Check your email for the confirmation link.",
 
-	'problem'		=>	"There was a problem. Please contact the system administrator.",
+    'emailinfo'        =>    "Check your email for instructions.",
 
-	'passwordchg'	=> 	"Password has been changed.",
+    'emailpassword'    =>    "Your password has been changed. Check your email for the new password.",
 
-	'passwordprob'	=>	"Password could not be changed.",
+    'problem'        =>    "There was a problem. Please contact the system administrator.",
 
-	'oldpassword'	=>	"You did not provide the correct original password.",
+    'passwordchg'    =>    "Your password has been changed.",
 
-	'suspended'		=>	"User has been suspended for 15 minutes.",
+    'passwordprob'    =>    "Your password could not be changed.",
 
-	'unsuspended'	=>	"Suspension removed.",
+    'oldpassword'    =>    "You did not provide the correct original password.",
 
-	'banned'		=>	"User has been banned.",
+    'suspended'        =>    "User has been suspended for 15 minutes.",
 
-	'unbanned'		=>	"User has been unbanned.",
+    'unsuspended'    =>    "Suspension removed.",
 
-	'inactive_reg' 	=>  "Registration is not available at this time.",
+    'banned'        =>    "User has been banned.",
 
-	'destroyed'     =>  "User has been removed.",
+    'unbanned'        =>    "User has been unbanned.",
 
-	'notdestroyed'  =>  "Unable to remove user.",
+    'inactive_reg'    =>  "Registration is not available at this time.",
 
-    'invalidreset'  =>  "Invalid password reset link.",
+    'destroyed'     =>  "User has been removed.",
 
-    'memberships'   =>  "User's group memberships have been updated."
+    'notdestroyed'  =>  "Unable to remove user."
 
 );

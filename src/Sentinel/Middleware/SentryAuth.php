@@ -1,32 +1,30 @@
-<?php namespace Sentinel\Middleware;
+<?php
 
-use Closure, Sentry;
-use Illuminate\Contracts\Routing\Middleware;
+namespace Sentinel\Middleware;
 
-class SentryAuth implements Middleware {
+use Closure;
+use Sentry;
 
-	/**
-	 * Handle an incoming request.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  \Closure  $next
-	 * @return mixed
-	 */
-	public function handle($request, Closure $next)
-	{
-        if ( ! Sentry::check())
-        {
-            if ($request->ajax())
-            {
+class SentryAuth
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
+     * @return mixed
+     */
+    public function handle($request, Closure $next)
+    {
+        if (!Sentry::check()) {
+            if ($request->ajax()) {
                 return response('Unauthorized.', 401);
-            }
-            else
-            {
+            } else {
+                $request->session()->reflash();
                 return redirect()->guest(route('sentinel.login'));
             }
         }
 
         return $next($request);
-	}
-
+    }
 }

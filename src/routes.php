@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-Route::group(['namespace' => 'Sentinel\Controllers'], function(){
+Route::group(['namespace' => 'Sentinel\Controllers', 'middleware' => ['web']], function () {
 
     // Sentinel Session Routes
     Route::get('login', ['as' => 'sentinel.login', 'uses' => 'SessionController@create']);
@@ -55,7 +55,4 @@ Route::group(['namespace' => 'Sentinel\Controllers'], function(){
     Route::get('groups/{hash}/edit', ['as' => 'sentinel.groups.edit', 'uses' => 'GroupController@edit']);
     Route::put('groups/{hash}', ['as' => 'sentinel.groups.update', 'uses' => 'GroupController@update']);
     Route::delete('groups/{hash}', ['as' => 'sentinel.groups.destroy', 'uses' => 'GroupController@destroy']);
-
 });
-
-

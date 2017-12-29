@@ -2,15 +2,8 @@
 
 use Illuminate\Support\Facades\DB;
 
-class SentryUserRepositoryTests extends Orchestra\Testbench\TestCase
+class SentryUserRepositoryTests extends SentinelTestCase
 {
-    /*
-     * These tests make use of the Orchestra Test Bench Package: https://github.com/orchestral/testbench
-     */
-
-    // The class being tested
-    protected $repo;
-
     /**
      * Setup the test environment.
      */
@@ -22,59 +15,9 @@ class SentryUserRepositoryTests extends Orchestra\Testbench\TestCase
     }
 
     /**
-     * Destroy the test environment
-     */
-    public function tearDown()
-    {
-        parent::tearDown();
-        \Mockery::close();
-    }
-
-    /**
-     * Define environment setup.
-     *
-     * @param  \Illuminate\Foundation\Application  $app
-     *
-     * @return void
-     */
-    protected function getEnvironmentSetUp($app)
-    {
-        $app['config']->set('database.default', 'testbench');
-        $app['config']->set('database.connections.testbench', [
-            'driver'   => 'sqlite',
-            'database' => __DIR__ . '/../_data/db.sqlite',
-            'prefix'   => '',
-        ]);
-        $app['config']->set('mail.pretend', true);
-        $app['config']->set('mail.from', ['from' => 'noreply@example.com', 'name' => null]);
-
-        // Prepare the sqlite database
-        // http://www.chrisduell.com/blog/development/speeding-up-unit-tests-in-php/
-        exec('cp ' . __DIR__ . '/../_data/prep.sqlite ' . __DIR__ . '/../_data/db.sqlite');
-    }
-
-    /**
-     * Get package providers.
-     *
-     * @param  \Illuminate\Foundation\Application  $app
-     *
-     * @return array
-     */
-    protected function getPackageProviders($app)
-    {
-        return [
-            'Sentinel\SentinelServiceProvider',
-        ];
-    }
-
-    /******************************************************************************************************************
-     * Tests
-     ******************************************************************************************************************/
-
-    /**
      * Test the instantiation of the Sentinel SentryUser repository
      */
-    function testRepoInstantiation()
+    public function testRepoInstantiation()
     {
         // Test that we are able to properly instantiate the SentryUser object for testing
         $this->assertInstanceOf('Sentinel\Repositories\User\SentryUserRepository', $this->repo);
@@ -93,7 +36,7 @@ class SentryUserRepositoryTests extends Orchestra\Testbench\TestCase
     /**
      * Test the creation of a user using the default configuration options
      */
-    function testSavingUser()
+    public function testSavingUser()
     {
         // Explicitly set the allow usernames config option to true
         app()['config']->set('sentinel.allow_usernames', true);
@@ -121,8 +64,8 @@ class SentryUserRepositoryTests extends Orchestra\Testbench\TestCase
         $testUser = DB::table('users')
             ->where('username', 'theviolinist')
             ->where('email', 'andrei@prozorov.net')
-            ->where('first_name', NULL)
-            ->where('last_name', NULL)
+            ->where('first_name', null)
+            ->where('last_name', null)
             ->first();
         $this->assertEquals('andrei@prozorov.net', $testUser->email);
     }
@@ -130,7 +73,7 @@ class SentryUserRepositoryTests extends Orchestra\Testbench\TestCase
     /**
      * Test the creation of a user that should be activated upon creation
      */
-    function testSavingActivatedUser()
+    public function testSavingActivatedUser()
     {
         // This is the code we are testing
         $result = $this->repo->store([
@@ -159,7 +102,7 @@ class SentryUserRepositoryTests extends Orchestra\Testbench\TestCase
     /**
      * Test the creation of a user without the use of a username
      */
-    function testSavingUserWithoutUsername()
+    public function testSavingUserWithoutUsername()
     {
         // Explicitly set the 'allow usernames' config option to false
         app()['config']->set('sentinel.allow_usernames', false);
@@ -187,7 +130,7 @@ class SentryUserRepositoryTests extends Orchestra\Testbench\TestCase
     /**
      * Test the creation of users with additional user fields
      */
-    function testSavingUserWithAdditionalData()
+    public function testSavingUserWithAdditionalData()
     {
         // Explicitly set the 'allow usernames' config option to false
         app()['config']->set('sentinel.allow_usernames', false);
@@ -220,7 +163,7 @@ class SentryUserRepositoryTests extends Orchestra\Testbench\TestCase
     }
 
     /**
-     * Test updating an existing user 
+     * Test updating an existing user
      */
     public function testUpdatingUser()
     {
@@ -280,8 +223,8 @@ class SentryUserRepositoryTests extends Orchestra\Testbench\TestCase
         $this->assertTrue($result->isSuccessful());
         $testUser = DB::table('users')
             ->where('id', $user->id)
-            ->where('first_name', NULL)
-            ->where('last_name', NULL)
+            ->where('first_name', null)
+            ->where('last_name', null)
             ->where('username', '')
             ->where('email', 'irina@prozorov.net')
             ->first();
@@ -514,5 +457,4 @@ class SentryUserRepositoryTests extends Orchestra\Testbench\TestCase
         $this->assertTrue(is_array($users));
         $this->assertEquals(2, count($users));
     }
-
 }

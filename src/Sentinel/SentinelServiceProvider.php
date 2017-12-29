@@ -1,4 +1,6 @@
-<?php namespace Sentinel;
+<?php
+
+namespace Sentinel;
 
 use Artisan;
 use Hashids\Hashids;
@@ -12,7 +14,6 @@ use Illuminate\Support\ServiceProvider;
 
 class SentinelServiceProvider extends ServiceProvider
 {
-
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -55,13 +56,12 @@ class SentinelServiceProvider extends ServiceProvider
 
         // Should we register the default routes?
         if (config('sentinel.routes_enabled')) {
-
             include $sentinelPath . '/../routes.php';
         }
 
         // Set up event listeners
         $dispatcher = $this->app->make('events');
-        $dispatcher->subscribe('Sentinel\Handlers\UserEventHandler');
+        $dispatcher->subscribe('Sentinel\Listeners\UserEventListener');
     }
 
     /**
@@ -107,7 +107,6 @@ class SentinelServiceProvider extends ServiceProvider
                 $app['events']
             );
         });
-
     }
 
     /**
@@ -125,7 +124,7 @@ class SentinelServiceProvider extends ServiceProvider
      */
     private function registerArtisanCommands()
     {
-        $this->app['sentinel.publisher'] = $this->app->share(function ($app) {
+        $this->app->singleton('sentinel.publisher', function ($app) {
             return new SentinelPublishCommand(
                 $app->make('files')
             );
@@ -133,5 +132,4 @@ class SentinelServiceProvider extends ServiceProvider
 
         $this->commands('sentinel.publisher');
     }
-
 }
